@@ -101,10 +101,9 @@ Separación de responsabilidades
 UI / Lógica / Datos
 Baja lógica (Soft Delete Pattern)
 Preservación de información
+
 📏 Métricas del Sistema
-
 Algunas métricas relevantes consideradas:
-
 🔹 Complejidad funcional:
 Módulos independientes (Clientes, Reservas, Caja)
 🔹 Acoplamiento:
@@ -123,19 +122,18 @@ Arquitectura WinForms no orientada a sistemas distribuidos
 Posibles conflictos en reservas simultáneas
 🔸 Auditoría limitada
 No hay logs detallados de acciones (solo baja lógica)
+
 🔍 Auditoría y Control
-
 El sistema permite auditoría básica mediante:
-
 Baja lógica (Estado)
 Registro de reservas y pagos
 Control de usuarios activos
 
 🔧 Mejoras futuras:
-
 Logs de actividad
 Historial de cambios
 Tracking de operaciones críticas
+
 🚀 Posibles Mejoras
 Implementación de roles más avanzados
 Migración a arquitectura web (ASP.NET / API)
@@ -143,11 +141,13 @@ Sistema de notificaciones
 Integración con pagos online
 Auditoría completa (logs + trazabilidad)
 Uso de JWT o OAuth para seguridad moderna
+
 🛠️ Tecnologías Utilizadas
 C#
 WinForms
 SQL Server
 ADO.NET
+
 📂 Instalación y Ejecución
 Clonar el repositorio:
 git clone https://github.com/tu-usuario/futzone.git
@@ -155,11 +155,11 @@ Configurar la conexión a SQL Server en el proyecto
 Ejecutar la base de datos:
 Script de creación (FutZone_DB)
 Ejecutar el proyecto desde Visual Studio
-👨‍💻 Autor
 
+👨‍💻 Autor
 Proyecto desarrollado por:
 
-Emanuel Jaime
+Lucas Jaime.
 
 📄 Licencia
 
