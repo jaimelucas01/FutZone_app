@@ -1,166 +1,149 @@
-⚽ FutZone - Sistema de Gestión para Complejos de Fútbol
-📌 Descripción General
+⚽ FutZone
+Sistema de Gestión para Complejos de Fútbol
+<p align="center"> <img src="https://img.shields.io/badge/C%23-WinForms-blue?style=for-the-badge&logo=csharp"> <img src="https://img.shields.io/badge/SQL%20Server-Database-red?style=for-the-badge&logo=microsoftsqlserver"> <img src="https://img.shields.io/badge/Status-En%20Desarrollo-yellow?style=for-the-badge"> <img src="https://img.shields.io/badge/License-Acad%C3%A9mico-lightgrey?style=for-the-badge"> </p>
+📌 Overview
 
-FutZone es un sistema de gestión desarrollado en C# (WinForms) con SQL Server, diseñado para administrar la operación diaria de un complejo de fútbol.
+FutZone es un sistema de escritorio desarrollado en C# (WinForms) con SQL Server, diseñado para digitalizar la gestión operativa de complejos de fútbol.
 
-El sistema permite gestionar clientes, reservas de canchas, control de pagos y cierre de caja, integrando mecanismos de seguridad, control de acceso y auditoría lógica de datos.
+Permite administrar clientes, reservas, pagos y control de caja, integrando mecanismos de seguridad, control de acceso y auditoría lógica.
 
-Este proyecto fue desarrollado en el marco de las materias Ingeniería de Software y Trabajo de Diploma, aplicando buenas prácticas de diseño, seguridad y gestión de datos.
+📚 Proyecto desarrollado para:
 
-🏗️ Arquitectura del Sistema
+Ingeniería de Software
+Trabajo de Diploma
+🏗️ Arquitectura
 
-El sistema sigue una arquitectura en capas simple, orientada a aplicaciones de escritorio:
+El sistema sigue una arquitectura en capas, enfocada en separación de responsabilidades:
 
-Capa de Presentación (UI):
-WinForms
+📦 FutZone
+ ┣ 📂 UI (WinForms)
+ ┣ 📂 Lógica de Negocio
+ ┗ 📂 Acceso a Datos
+🔹 Características clave
 Navegación mediante MenuStrip
 Formularios modales (ShowDialog())
-Capa de Lógica de Negocio:
-Validaciones
-Reglas de negocio (reservas, pagos, caja)
-Capa de Acceso a Datos:
-Conexión a SQL Server
-Operaciones CRUD
-Implementación de baja lógica
+Separación UI / lógica / datos
+Bajo acoplamiento, alta cohesión
 🗄️ Base de Datos
 
 Motor: SQL Server
-Base de datos: FutZone_DB
+Base: FutZone_DB
 
-📊 Tablas principales:
-Usuarios
-Grupos
-Clientes
-Reservas
-🔁 Estrategia de Eliminación
-
-Se implementa baja lógica, utilizando un campo:
-
+📊 Entidades principales
+👤 Usuarios
+👥 Grupos
+🧍 Clientes
+📅 Reservas
+🔁 Soft Delete (Baja Lógica)
 Estado = 'ACTIVO' / 'INACTIVO'
 
-Esto permite:
+✔ Permite:
 
-Auditoría de datos
-Recuperación de información
-Evitar pérdida de integridad
+Auditoría
+Recuperación de datos
+Integridad del sistema
 🔐 Seguridad
-✅ Autenticación
-Login contra base de datos
-Validación de credenciales en tiempo real
+🔑 Autenticación
+Login validado contra base de datos
 🔒 Encriptación
-Uso de SHA256 mediante:
 Seguridad.EncriptarSHA256()
-Protección de contraseñas almacenadas
+Protección de contraseñas
 👤 Autorización
 
-Se implementa un patrón Singleton mediante la clase Sesion:
+Implementación de Singleton (Sesion):
 
-Almacena:
-ID
-Nombre
-Usuario
-Permite:
-Control de acceso
-Restricción de funcionalidades
-
-Ejemplo:
-
-Usuarios admin → acceso total
-Usuarios comunes → menús restringidos
-⚙️ Funcionalidades Principales
-👥 ABM de Clientes
-Alta, baja lógica y modificación
-Validación de campos obligatorios
-Persistencia en base de datos
+Usuario logueado en memoria
+Control de permisos dinámico
+Rol	Acceso
+Admin	Completo
+Usuario	Restringido
+⚙️ Funcionalidades
+👥 Gestión de Clientes
+Alta / modificación / baja lógica
+Validaciones de datos
 📅 Gestión de Reservas
 Registro de turnos
 Asociación con clientes
-Control de disponibilidad
-💰 Caja y Reportes
-Registro de pagos (Pagado = true/false)
+Control básico de disponibilidad
+💰 Caja & Reportes
+Estado de pago (Pagado)
 Cálculo de ingresos diarios:
-SUM(Total)
-Cierre de caja diario
-🎨 Interfaz de Usuario
-Navegación mediante MenuStrip:
+SELECT SUM(Total) FROM Reservas
+Cierre de caja
+🎨 Interfaz
+Menu principal con:
 Archivo
 Gestión
 Seguridad
-Uso de formularios modales:
-ShowDialog()
+Formularios modales:
+ShowDialog();
 
 ✔ Ventajas:
 
-Control del flujo
-Prevención de acciones simultáneas inválidas
-🧩 Patrones de Diseño Aplicados
-Singleton
-Clase Sesion
-Gestión centralizada del usuario logueado
-Separación de responsabilidades
-UI / Lógica / Datos
-Baja lógica (Soft Delete Pattern)
-Preservación de información
-📏 Métricas del Sistema
+Flujo controlado
+Prevención de errores
+🧩 Patrones de Diseño
+🧠 Singleton
+Gestión de sesión (Sesion)
+🧱 Separación de capas
+UI / Negocio / Datos
+♻️ Soft Delete
+Persistencia segura
+📏 Métricas de Ingeniería
+🔹 Cohesión: Alta (módulos bien definidos)
+🔹 Acoplamiento: Bajo
+🔹 Seguridad: Media (hash SHA256)
+🔹 Mantenibilidad: Alta
+⚠️ Riesgos
+❗ SHA256 sin salt → mejora pendiente
+❗ No hay control de concurrencia en reservas
+❗ Auditoría limitada (sin logs)
+❗ Escalabilidad limitada (WinForms)
+🔍 Auditoría
 
-Algunas métricas relevantes consideradas:
+✔ Implementado:
 
-🔹 Complejidad funcional:
-Módulos independientes (Clientes, Reservas, Caja)
-🔹 Acoplamiento:
-Bajo entre UI y lógica de negocio
-🔹 Cohesión:
-Alta dentro de cada módulo
-🔹 Seguridad:
-Uso de hashing (SHA256)
-Control de sesiones
-⚠️ Riesgos Identificados
-🔸 Seguridad básica
-SHA256 sin salt → posible mejora futura
-🔸 Escalabilidad limitada
-Arquitectura WinForms no orientada a sistemas distribuidos
-🔸 Concurrencia
-Posibles conflictos en reservas simultáneas
-🔸 Auditoría limitada
-No hay logs detallados de acciones (solo baja lógica)
-🔍 Auditoría y Control
+Baja lógica
+Registro de operaciones clave
 
-El sistema permite auditoría básica mediante:
-
-Baja lógica (Estado)
-Registro de reservas y pagos
-Control de usuarios activos
-
-🔧 Mejoras futuras:
+🚧 Pendiente:
 
 Logs de actividad
 Historial de cambios
-Tracking de operaciones críticas
-🚀 Posibles Mejoras
-Implementación de roles más avanzados
-Migración a arquitectura web (ASP.NET / API)
-Sistema de notificaciones
-Integración con pagos online
-Auditoría completa (logs + trazabilidad)
-Uso de JWT o OAuth para seguridad moderna
-🛠️ Tecnologías Utilizadas
-C#
-WinForms
-SQL Server
-ADO.NET
-📂 Instalación y Ejecución
-Clonar el repositorio:
+Tracking de usuarios
+🚀 Roadmap / Mejoras Futuras
+🔐 Roles avanzados (RBAC)
+🌐 Migración a Web (ASP.NET / API)
+💳 Integración con pagos online
+📊 Dashboard de métricas
+🧾 Sistema completo de auditoría
+🔑 Autenticación moderna (JWT / OAuth)
+🛠️ Stack Tecnológico
+Tecnología	Uso
+C#	Backend
+WinForms	UI
+SQL Server	Base de datos
+ADO.NET	Acceso a datos
+📂 Instalación
 git clone https://github.com/tu-usuario/futzone.git
-Configurar la conexión a SQL Server en el proyecto
-Ejecutar la base de datos:
-Script de creación (FutZone_DB)
-Ejecutar el proyecto desde Visual Studio
+Pasos:
+Configurar conexión a SQL Server
+Ejecutar script de base de datos
+Abrir en Visual Studio
+Ejecutar proyecto
 👨‍💻 Autor
 
-Proyecto desarrollado por:
-
-Lucas Jaime.
+Lucas Jaime
 
 📄 Licencia
 
-Uso académico – Proyecto universitario.
+Uso académico — Proyecto universitario.
+
+⭐ Notas Finales
+
+Este proyecto aplica conceptos reales de:
+
+Ingeniería de Software
+Seguridad básica
+Arquitectura en capas
+Gestión de datos
